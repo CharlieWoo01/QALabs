@@ -1,22 +1,47 @@
 package lab09;
 
-public class Ball {
+enum SHAPE_TYPE {
+    RECTANGLE,
+    THREEDRECTANGLE,
+    ROUNDRECTANGLE,
+    OVAL,
+    ARC
+}
+
+public class Shape {
 
     public int x, y, w, h;
     private int dirX, dirY;
 
-    public Ball(int x, int y, int w, int h, int dirX, int dirY) {
+    private SHAPE_TYPE chapeType;
+
+    public Shape(int x, int y, int w, int h, int dirX, int dirY, SHAPE_TYPE shapeType) {
         setX(x);
         setY(y);
         setH(h);
         setW(w);
         setDirX(dirX);
         setDirY(dirY);
-
+        setChapeType(shapeType);
     }
 
-    public Ball(int x, int y, int h, int w) {
-        this(x, y, h, w, 1, 1);
+    public Shape(int x, int y, int h, int w, SHAPE_TYPE shapeType) {
+
+        this(x, y, h, w, 1, 1, shapeType);
+    }
+
+    /**
+     * Method to get chapeType
+     */
+    protected SHAPE_TYPE getChapeType() {
+        return chapeType;
+    }
+
+    /**
+     * Method to set chapeType
+     */
+    public void setChapeType(SHAPE_TYPE chapeType) {
+        this.chapeType = chapeType;
     }
 
     /**

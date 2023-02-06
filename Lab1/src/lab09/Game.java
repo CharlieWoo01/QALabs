@@ -8,9 +8,9 @@ import javax.swing.*;
 
 public class Game extends Canvas {
 
-    public static Ball ball;
+    public static Shape shape;
 
-    public static Ball b[] = new Ball[3];
+    ArrayList<Shape> Shape = new ArrayList<Shape>(3);
 
     public static void main(String args[]) {
         Game game = new Game();
@@ -22,10 +22,9 @@ public class Game extends Canvas {
         frame.pack();
         frame.setVisible(true);
 
-        b[0] = new Ball(10, 20, 30, 40);
-        b[1] = new Ball(50, 60, 70, 80);
-        b[2] = new Ball(100, 200, 150, 250);
-
+        Shape.add(new Shape(10, 20, 30, 40, SHAPE_TYPE.OVAL));
+        Shape.add(new Shape(50, 60, 70, 80, SHAPE_TYPE.RECTANGLE));
+        Shape.add(new Shape(100, 200, 150, 250, SHAPE_TYPE.THREEDRECTANGLE));
 
         Timer t = new Timer();
         TimerTask tt = new TimerTask() {
@@ -47,8 +46,9 @@ public class Game extends Canvas {
     }
 
     public void draw() {
-        for (int i = 0; i < b.length; i++) {
-            b[i].move();
+        for (int i = 0; i < Shape.size(); i++) {
+//            b[i].move();
+            Shape.get(i).move();
         }
         this.repaint();
 
@@ -56,9 +56,29 @@ public class Game extends Canvas {
 
     public void paint(Graphics g) {
         g.fillRect(0, 0, 300, 300);
-        for (int i = 0; i < b.length; i++) {
+        for (int i = 0; i < Shape.size(); i++) {
+
+            if(Shape.get(i).getChapeType() == SHAPE_TYPE.RECTANGLE) {
+                g.fillRect(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h);
+            }
+            else if(Shape.get(i).getChapeType() == SHAPE_TYPE.ROUNDRECTANGLE) {
+                g.fill3DRect(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h, true);
+            }
+            else if(Shape.get(i).getChapeType() == SHAPE_TYPE.ROUNDRECTANGLE) {
+                g.fillRect(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h);
+            }
+            else if(Shape.get(i).getChapeType() == SHAPE_TYPE.OVAL) {
+                g.fillOval(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h);
+            }
+            else if(Shape.get(i).getChapeType() == SHAPE_TYPE.ARC) {
+                g.fillArc(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h, 0, 0);
+            }
+            else {
+                g.fillOval(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h);
+            }
+
             g.setColor(Color.red);
-            g.fillOval(b[i].x, b[i].y, b[i].w, b[i].h );
+            g.fillOval(Shape.get(i).x, Shape.get(i).y, Shape.get(i).w, Shape.get(i).h);
 
         }
     }
