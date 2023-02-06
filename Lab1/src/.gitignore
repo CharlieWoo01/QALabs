@@ -1,3 +1,2 @@
-# Some files/directories to ignore when uploading
-/out
-.idea/misc.xml
+# Compiled class file
+*.class
