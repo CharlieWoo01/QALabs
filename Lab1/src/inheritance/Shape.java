@@ -2,7 +2,7 @@ package inheritance;
 
 import java.awt.*;
 
-public class Shape {
+public abstract class Shape {
     public Color colour;
     public Point position;
 
