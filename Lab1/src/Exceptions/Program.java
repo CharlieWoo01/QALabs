@@ -21,7 +21,7 @@ public class Program {
     }
 
     private static void log(String msg) throws IOException {
-        File file = new File("Lab1/src/log.txt");
+        File file = new File("Lab1/src/File_Resources/log.txt");
         FileWriter fr = new FileWriter(file, true);
         BufferedWriter br = new BufferedWriter(fr);
         br.write(msg + "\r\n");
